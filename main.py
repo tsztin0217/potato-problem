@@ -14,7 +14,30 @@ class Plant:
 #       Add your new classes here!       #
 # (Make sure not to accidentally indent) #
 ##########################################
-
+class Potato(Plant):
+    def __init__(self, energy):
+        super().__init__(energy)
+        self.tubers = []
+    
+    def sprout_tuber(self):
+        if self.energy >= 30:
+            new_tuber = Tuber()
+            self.tubers.append(new_tuber)
+            self.energy -= 30
+    
+    def absorb_sunlight(self, sunlight_energy):
+        if self.tubers:
+            self.energy += (sunlight_energy / 2)
+            remaining_energy = sunlight_energy / 2
+            remaining_tubers = len(self.tubers)
+            for tuber in self.tubers:
+                tuber.energy += remaining_energy / remaining_tubers
+        else:
+            self.energy += sunlight_energy
+    
+class Tuber:
+    def __init__(self):
+        self.energy = 30
 
 ########## WAVE 1 ##########
 # Checking the behavior for creating an instance of Potato
